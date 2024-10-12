@@ -1,7 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Movie Payment Service API
+  title: Movie Payment API
   version: 1.0.0
+  description: Allows users to browse available movies and make payments for movie tickets
 paths:
   /movies:
     get:
@@ -22,6 +23,8 @@ paths:
                     name:
                       type: string
                       example: "Deadpool & Wolverine"
+        '404':
+          description: No movies found
   /payment:
     post:
       summary: Submit a movie ticket payment
@@ -55,7 +58,7 @@ paths:
                 properties:
                   paymentId:
                     type: string
-                    example: "transaction67817181"
+                    example: "transaction456"
                   result:
                     type: string
                     example: "success"
@@ -69,4 +72,20 @@ paths:
                   errorMessage:
                     type: string
                     example: "Payment method invalid"
+  /movies/{id}:
+    delete:
+      summary: Delete a movie by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Movie deleted successfully
+        '404':
+          description: Movie not found
+        '500':
+          description: Internal server error
 
