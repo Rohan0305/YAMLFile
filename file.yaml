@@ -21,7 +21,7 @@ paths:
                       example: 1
                     name:
                       type: string
-                      example: "Inception"
+                      example: "Deadpool & Wolverine"
   /payment:
     post:
       summary: Submit a movie ticket payment
