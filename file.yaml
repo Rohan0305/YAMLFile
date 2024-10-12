@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Movie Payment API
+  version: 1.0.0
+paths:
+  /movies:
+    get:
+      summary: Get a list of movies
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Inception"
+                    genre:
+                      type: string
+                      example: "Sci-Fi"
+  /payment:
+    post:
+      summary: Process a payment for a movie ticket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                movieId:
+                  type: integer
+                  example: 1
+                userId:
+                  type: integer
+                  example: 123
+                paymentMethod:
+                  type: string
+                  example: "credit_card"
+                amount:
+                  type: number
+                  format: float
+                  example: 12.99
+      responses:
+        '200':
+          description: Payment processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionId:
+                    type: string
+                    example: "txn_123456789"
+                  status:
+                    type: string
+                    example: "success"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid payment details"
